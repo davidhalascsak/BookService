@@ -1,1 +1,1 @@
-# BookShop
+# book-service
