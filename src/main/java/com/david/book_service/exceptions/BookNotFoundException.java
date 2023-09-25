@@ -1,4 +1,4 @@
-package com.david.book_service;
+package com.david.book_service.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

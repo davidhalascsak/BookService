@@ -1,5 +1,9 @@
-package com.david.book_service;
+package com.david.book_service.controller;
 
+import com.david.book_service.model.Book;
+import com.david.book_service.exceptions.BookNotFoundException;
+import com.david.book_service.repository.BookRepository;
+import com.david.book_service.service.BookService;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

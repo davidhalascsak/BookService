@@ -1,5 +1,6 @@
-package com.david.book_service;
+package com.david.book_service.repository;
 
+import com.david.book_service.model.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

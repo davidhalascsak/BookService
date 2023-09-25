@@ -1,5 +1,7 @@
-package com.david.book_service;
+package com.david.book_service.service;
 
+import com.david.book_service.model.Book;
+import com.david.book_service.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -15,7 +17,7 @@ public class BookService {
     private final MongoTemplate mongoTemplate;
 
     @Autowired
-    BookService(BookRepository bookRepository, MongoTemplate mongoTemplate) {
+    public BookService(BookRepository bookRepository, MongoTemplate mongoTemplate) {
         this.bookRepository = bookRepository;
         this.mongoTemplate = mongoTemplate;
     }
