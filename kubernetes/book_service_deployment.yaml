@@ -1,0 +1,309 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    autopilot.gke.io/resource-adjustment: >-
+      {"input":{"containers":[{"name":"bookservice-1"}]},"output":{"containers":[{"limits":{"cpu":"500m","ephemeral-storage":"1Gi","memory":"2Gi"},"requests":{"cpu":"500m","ephemeral-storage":"1Gi","memory":"2Gi"},"name":"bookservice-1"}]},"modified":true}
+    autopilot.gke.io/warden-version: 2.7.41
+  labels:
+    app: book
+  managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:replicas': {}
+      manager: vpa-recommender
+      operation: Update
+      subresource: scale
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:progressDeadlineSeconds': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector': {}
+          'f:strategy':
+            'f:rollingUpdate':
+              .: {}
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+            'f:type': {}
+          'f:template':
+            'f:metadata':
+              'f:labels':
+                .: {}
+                'f:app': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"bookservice-1"}':
+                  .: {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+                  'f:resources': {}
+                  'f:terminationMessagePath': {}
+                  'f:terminationMessagePolicy': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:securityContext': {}
+              'f:terminationGracePeriodSeconds': {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: '2023-09-25T14:59:09Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:gcb-build-id': {}
+            'f:gcb-trigger-id': {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+          'f:labels':
+            'f:app.kubernetes.io/managed-by': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/version': {}
+        'f:spec':
+          'f:template':
+            'f:metadata':
+              'f:annotations':
+                .: {}
+                'f:gcb-build-id': {}
+                'f:gcb-trigger-id': {}
+              'f:labels':
+                'f:app.kubernetes.io/managed-by': {}
+                'f:app.kubernetes.io/name': {}
+                'f:app.kubernetes.io/version': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"bookservice-1"}':
+                  'f:image': {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: '2023-09-25T15:29:34Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:deployment.kubernetes.io/revision': {}
+        'f:status':
+          'f:availableReplicas': {}
+          'f:conditions':
+            .: {}
+            'k:{"type":"Available"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Progressing"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:observedGeneration': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+          'f:updatedReplicas': {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2023-09-25T15:36:32Z'
+  name: book
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: book
+    spec:
+      containers:
+        - image: gcr.io/local-chalice-395120/github.com/davidhalascsak/bookservice
+          imagePullPolicy: IfNotPresent
+          name: bookservice-1
+          resources:
+            limits:
+              cpu: 500m
+              ephemeral-storage: 1Gi
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              ephemeral-storage: 1Gi
+              memory: 2Gi
+          securityContext:
+            capabilities:
+              drop:
+                - NET_RAW
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      tolerations:
+        - effect: NoSchedule
+          key: kubernetes.io/arch
+          operator: Equal
+          value: amd64
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: book
+  managedFields:
+    - apiVersion: autoscaling/v2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:maxReplicas': {}
+          'f:metrics': {}
+          'f:minReplicas': {}
+          'f:scaleTargetRef':
+            'f:apiVersion': {}
+            'f:kind': {}
+            'f:name': {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: '2023-09-25T14:59:10Z'
+    - apiVersion: autoscaling/v2
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:conditions':
+            .: {}
+            'k:{"type":"AbleToScale"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"ScalingActive"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"ScalingLimited"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:currentMetrics': {}
+          'f:currentReplicas': {}
+          'f:desiredReplicas': {}
+          'f:lastScaleTime': {}
+      manager: vpa-recommender
+      operation: Update
+      subresource: status
+      time: '2023-09-25T16:16:51Z'
+  name: book-hpa-67lt
+  namespace: default
+spec:
+  maxReplicas: 5
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: book
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: book
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+        'f:spec':
+          'f:allocateLoadBalancerNodePorts': {}
+          'f:externalTrafficPolicy': {}
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":8080,"protocol":"TCP"}':
+              .: {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: '2023-09-25T15:00:10Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:finalizers':
+            .: {}
+            'v:"service.kubernetes.io/load-balancer-cleanup"': {}
+        'f:status':
+          'f:loadBalancer':
+            'f:ingress': {}
+      manager: cloud-controller-manager
+      operation: Update
+      subresource: status
+      time: '2023-09-25T15:00:46Z'
+  name: book-service
+  namespace: default
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 34.118.236.185
+  clusterIPs:
+    - 34.118.236.185
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 31851
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: book
+  sessionAffinity: None
+  type: LoadBalancer
