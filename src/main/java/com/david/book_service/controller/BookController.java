@@ -21,11 +21,6 @@ public class BookController {
         this.bookService = new BookService(bookRepository, mongoTemplate);
     }
 
-    @GetMapping("/hello")
-    public String getHello() {
-        return "Hello K8S";
-    }
-
     @GetMapping("/books")
     public List<Book> getBooks() {
         return bookService.getAllBooks();
