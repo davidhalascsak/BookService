@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: book-service
-  name: book-service
+    app: book
+  name: book
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: book-service
+      app: book
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: book-service
+        app: book
     spec:
       containers:
         - image: gcr.io/bookshop-416221/github.com/davidhalascsak/bookservice
@@ -29,8 +29,8 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app: book-service
-  name: book-service-hpa-wokl
+    app: book
+  name: book-hpa-wokl
   namespace: default
 spec:
   maxReplicas: 3
@@ -38,14 +38,14 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 50
+          averageUtilization: 80
           type: Utilization
       type: Resource
   minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: book-service
+    name: book
 ---
 apiVersion: v1
 kind: Service
@@ -55,8 +55,8 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
   labels:
-    app: book-service
-  name: book-service-service
+    app: book
+  name: book-service
   namespace: default
 spec:
   ports:
@@ -64,7 +64,7 @@ spec:
       protocol: TCP
       targetPort: 8100
   selector:
-    app: book-service
+    app: book
   sessionAffinity: None
   type: LoadBalancer
 
