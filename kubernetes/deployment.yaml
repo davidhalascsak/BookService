@@ -25,11 +25,16 @@ spec:
           imagePullPolicy: IfNotPresent
           name: bookservice
           env:
-          - name: MONGODB_URI
+          - name: MONGODB_USERNAME
             valueFrom:
               secretKeyRef:
                name: connections
-               key: mongodb_uri
+               key: mongodb_username
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: connections
+                key: mongodb_password
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
