@@ -24,9 +24,12 @@ spec:
         - image: gcr.io/bookshop-416221/github.com/davidhalascsak/bookservice
           imagePullPolicy: IfNotPresent
           name: bookservice
-          envFrom:
-            - secretRef:
-                name: connections
+          env:
+          - name: MONGODB_URI
+            valueFrom:
+              secretKeyRef:
+               name: connections
+               key: mongodb_uri
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
