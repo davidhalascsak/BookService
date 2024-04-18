@@ -24,6 +24,9 @@ spec:
         - image: gcr.io/bookshop-416221/github.com/davidhalascsak/bookservice
           imagePullPolicy: IfNotPresent
           name: bookservice
+          envFrom:
+            - secretRef:
+                name: connections
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
