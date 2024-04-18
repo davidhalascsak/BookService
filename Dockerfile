@@ -8,6 +8,5 @@ RUN ./mvnw clean install
 
 FROM openjdk:17-alpine
 WORKDIR /app
-EXPOSE 8100
 COPY --from=builder /app/target/*.jar /app/*.jar
 ENTRYPOINT ["java", "-jar", "/app/*.jar" ]
