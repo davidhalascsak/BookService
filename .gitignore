@@ -1,3 +1,4 @@
 target/
 .idea
 kubernetes/connections.yaml
+kubernetes/deployment_old.yaml
