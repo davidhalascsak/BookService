@@ -1,4 +1,5 @@
 target/
 .idea
-kubernetes/connections.yaml
-kubernetes/deployment_old.yaml
+connections.yaml
+deployment_old.yaml
+secret.properties
