@@ -14,49 +14,55 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/books")
 public class BookController {
 
     private BookService bookService;
 
-    @GetMapping("/books")
+    @GetMapping
     public ResponseEntity<List<Book>> getBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    @GetMapping("/books/genres/{genre}")
+    @GetMapping("/topRated")
+    public ResponseEntity<List<Book>> getTopRatedBooks() {
+        return ResponseEntity.ok(bookService.getTopRatedBooks());
+    }
+
+    @GetMapping("/genres/{genre}")
     public ResponseEntity<List<Book>> getBooksByGenre(@PathVariable String genre) {
         return ResponseEntity.ok(bookService.getAllBooksByGenre(genre));
     }
 
-    @PostMapping("/books")
+    @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         Book newBook = bookService.saveBook(book);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newBook.getId())
+                .path("/{isbn}")
+                .buildAndExpand(newBook.getIsbn())
                 .toUri();
 
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/books/isbn/{isbn}")
+    @GetMapping("/isbn/{isbn}")
     public ResponseEntity<Book> getBooksByIsbn(@PathVariable String isbn) throws BookNotFoundException {
         return ResponseEntity.ok(bookService.findBookByIsbn(isbn));
     }
 
-    @GetMapping("/books/search")
+    @GetMapping("/search")
     public ResponseEntity<List<Book>> getAllBooksByTitle(@RequestParam String text) {
         return ResponseEntity.ok(bookService.getAllBooksByTitle(text));
     }
 
-    @GetMapping("/books/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Book>> getAllBooksByIds(@RequestParam("ids") List<String> ids) {
         return ResponseEntity.ok(bookService.getAllBooksByIds(ids));
     }
 
-    @DeleteMapping("/books/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable("id") String id) throws BookNotFoundException {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable("id") String id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }
