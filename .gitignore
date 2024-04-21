@@ -3,3 +3,4 @@ target/
 connections.yaml
 deployment_old.yaml
 secret.properties
+*.iml
