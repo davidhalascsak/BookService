@@ -1,5 +1,5 @@
 package com.david.book_service;
-
+/*
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -36,3 +36,5 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         return "shopdb";
     }
 }
+
+ */
