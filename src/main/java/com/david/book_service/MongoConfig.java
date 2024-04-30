@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
-import java.util.Base64;
-
 @Slf4j
 @Configuration
 public class MongoConfig extends AbstractMongoClientConfiguration {
@@ -24,13 +22,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Override
     public @NonNull MongoClient mongoClient() {
-        String decodedUsername = new String(Base64.getDecoder().decode(username));
-        String decodedPassword = new String(Base64.getDecoder().decode(password));
-
-        log.info("encoded username: {}", username);
-        log.info("decoded username: {}", decodedUsername);
-
-        String uri = "mongodb+srv://" + decodedUsername + ":" + decodedPassword +"@webshop.hy2s4mk.mongodb.net";
+        String uri = "mongodb+srv://" + username + ":" + password +"@webshop.hy2s4mk.mongodb.net";
         ConnectionString connectionString = new ConnectionString(uri);
 
         final MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
