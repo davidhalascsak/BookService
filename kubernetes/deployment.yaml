@@ -35,6 +35,14 @@ spec:
               secretKeyRef:
                 name: connections
                 key: mongodb_password
+          readinessProbe:
+            httpGet:
+              port: 8100
+              path: /actuator/health/readiness
+          livenessProbe:
+            httpGet:
+              port: 8100
+              path: /actuator/health/liveness
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
