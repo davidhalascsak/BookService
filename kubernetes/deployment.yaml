@@ -78,5 +78,3 @@ spec:
     app: book
   sessionAffinity: None
   type: LoadBalancer
-
-      
