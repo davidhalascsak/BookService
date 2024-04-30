@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class BookControllerTests {
+public class BookControllerIT {
 
     @Test
     public void testGetTopRatedBooks() {
