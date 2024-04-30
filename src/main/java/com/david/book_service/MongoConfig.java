@@ -19,7 +19,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Value("${MONGODB_USERNAME}")
     private String username;
 
-    @Value("${mongodb.password}")
+    @Value("${MONGODB_PASSWORD}")
     private String password;
 
     @Override
