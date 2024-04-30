@@ -21,7 +21,7 @@ spec:
         app: book
     spec:
       containers:
-        - image: gcr.io/bookshop-416221/github.com/davidhalascsak/bookservice
+        - image: gcr.io/weighty-psyche-421907/github.com/davidhalascsak/bookservice
           imagePullPolicy: IfNotPresent
           name: bookservice
           env:
