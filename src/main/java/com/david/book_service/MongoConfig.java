@@ -4,34 +4,43 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.lang.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 import java.util.Base64;
 
+@Slf4j
 @Configuration
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Value("${MONGODB_USERNAME}")
     private String username;
 
-    @Value("${MONGODB_PASSWORD}")
+    @Value("${mongodb.password}")
     private String password;
 
     @Override
-    protected void configureClientSettings(MongoClientSettings.Builder builder) {
+    public @NonNull MongoClient mongoClient() {
         String decodedUsername = new String(Base64.getDecoder().decode(username));
         String decodedPassword = new String(Base64.getDecoder().decode(password));
 
-        String uri = "mongodb+srv://" + decodedUsername + ":" + decodedPassword +"@webshop.hy2s4mk.mongodb.net";
+        log.info("encoded username: {}", username);
+        log.info("decoded username: {}", decodedUsername);
 
-        builder.applyConnectionString(new ConnectionString(uri));
+        String uri = "mongodb+srv://" + decodedUsername + ":" + decodedPassword +"@webshop.hy2s4mk.mongodb.net";
+        ConnectionString connectionString = new ConnectionString(uri);
+
+        final MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .build();
+        return MongoClients.create(mongoClientSettings);
     }
 
     @Override
-    protected String getDatabaseName() {
+    protected @NonNull String getDatabaseName() {
         return "shopdb";
     }
 }
