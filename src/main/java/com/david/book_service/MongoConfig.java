@@ -1,25 +1,20 @@
 package com.david.book_service;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.mongo.MongoClientSettingsBuilderCustomizer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.Base64;
 
 @Configuration
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
-    @Value("${MONGODB_USERNAME}")
+    @Value("${mongodb.username}")
     private String username;
 
-    @Value("${MONGODB_PASSWORD}")
+    @Value("${mongodb.password}")
     private String password;
 
     @Override
