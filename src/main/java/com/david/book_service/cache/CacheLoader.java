@@ -1,7 +1,7 @@
 package com.david.book_service.cache;
 
-import com.david.book_service.model.Book;
-import com.david.book_service.service.BookService;
+import com.david.book_service.models.Book;
+import com.david.book_service.services.BookService;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

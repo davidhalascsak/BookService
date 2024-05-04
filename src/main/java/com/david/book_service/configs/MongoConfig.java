@@ -1,4 +1,4 @@
-package com.david.book_service;
+package com.david.book_service.configs;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -23,7 +23,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Override
     public @NonNull MongoClient mongoClient() {
         String uri = "mongodb+srv://" + username + ":" + password +"@webshop.hy2s4mk.mongodb.net";
-        log.info("connection url: {}", uri);
         ConnectionString connectionString = new ConnectionString(uri);
 
         final MongoClientSettings mongoClientSettings = MongoClientSettings.builder()

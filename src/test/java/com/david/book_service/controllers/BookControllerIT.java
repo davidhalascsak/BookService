@@ -1,6 +1,6 @@
 package com.david.book_service.controllers;
 
-import com.david.book_service.model.Book;
+import com.david.book_service.models.Book;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 

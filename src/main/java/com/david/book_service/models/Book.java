@@ -1,4 +1,4 @@
-package com.david.book_service.model;
+package com.david.book_service.models;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

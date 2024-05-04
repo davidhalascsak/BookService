@@ -1,8 +1,8 @@
-package com.david.book_service.service;
+package com.david.book_service.services;
 
 import com.david.book_service.exceptions.BookNotFoundException;
-import com.david.book_service.model.Book;
-import com.david.book_service.repository.BookRepository;
+import com.david.book_service.models.Book;
+import com.david.book_service.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

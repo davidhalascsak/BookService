@@ -1,8 +1,8 @@
-package com.david.book_service.controller;
+package com.david.book_service.controllers;
 
 import com.david.book_service.exceptions.BookNotFoundException;
-import com.david.book_service.model.Book;
-import com.david.book_service.service.BookService;
+import com.david.book_service.models.Book;
+import com.david.book_service.services.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

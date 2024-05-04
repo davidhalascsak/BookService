@@ -1,6 +1,6 @@
-package com.david.book_service.repository;
+package com.david.book_service.repositories;
 
-import com.david.book_service.model.Book;
+import com.david.book_service.models.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
