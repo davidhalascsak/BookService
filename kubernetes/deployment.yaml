@@ -4,7 +4,7 @@ metadata:
   labels:
     app: book
   name: book
-  namespace: default
+  namespace: shop
 spec:
   replicas: 1
   selector:
@@ -50,7 +50,7 @@ metadata:
   labels:
     app: book
   name: book-hpa-wokl
-  namespace: default
+  namespace: shop
 spec:
   maxReplicas: 3
   metrics:
@@ -69,14 +69,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-  finalizers:
-    - service.kubernetes.io/load-balancer-cleanup
   labels:
     app: book
   name: book-service
-  namespace: default
+  namespace: shop
 spec:
   ports:
     - port: 8100
