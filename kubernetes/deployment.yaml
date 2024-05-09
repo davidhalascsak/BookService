@@ -71,7 +71,7 @@ kind: Service
 metadata:
   labels:
     app: book
-  name: book
+  name: book-service
   namespace: shop
 spec:
   ports:
