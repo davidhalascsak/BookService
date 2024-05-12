@@ -1,6 +1,6 @@
 package com.david.book_service.cache;
 
-import com.david.book_service.models.Book;
+import com.david.book_service.models.data.BookDTO;
 import com.david.book_service.services.BookService;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -21,9 +21,9 @@ public class CacheLoader {
 
     @PostConstruct
     public void loadCache() {
-        List<Book> topRatedBooks = service.getTopRatedBooks();
-        for(Book book: topRatedBooks) {
-            service.addToCache(book);
+        List<BookDTO> topRatedBooks = service.getTopRatedBooks();
+        for(BookDTO bookDTO: topRatedBooks) {
+            service.addToCache(bookDTO);
         }
         log.info("Top rated books are cached");
     }
